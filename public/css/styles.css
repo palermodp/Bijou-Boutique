@@ -31,21 +31,114 @@ main {
 .icons-container {
     position: absolute;
     top: 20px;
-    right: 20px;
+    right: 80px;
     display: flex;
-    gap: 10px;
+    gap: 30px;
+    align-items: center;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background: linear-gradient(135deg, #001a3f, #002c66);
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    padding: 8px 12px;
+    position: absolute;
+    z-index: 1000;
+    bottom: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(-8px);
 }
 
 .icons-container i {
-    font-size: 20px;
+    font-size: 24px;
     color: #fdfdfd;
     cursor: pointer;
-    transition: transform 0.3s, color 0.3s;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    padding: 8px;
 }
 
 .icons-container i:hover {
-    transform: scale(1.1);
+    transform: translateY(-3px) scale(1.1);
     color: #9c7d03;
+    text-shadow: 0 5px 15px rgba(156, 125, 3, 0.3);
+}
+
+.icons-container i::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    left: 0;
+    top: 0;
+    transform: scale(0);
+    transition: transform 0.3s ease;
+}
+
+.icons-container i:hover::after {
+    transform: scale(1);
+}
+
+.cart-icon {
+    position: relative;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #9c7d03;
+    color: white;
+    font-size: 12px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transform: scale(0);
+    animation: popIn 0.3s forwards;
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.profile-picture {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    object-fit: cover;
+    transition: all 0.4s ease;
+}
+
+.profile-picture:hover {
+    transform: translateY(-3px) scale(1.05);
+    border-color: #9c7d03;
+    box-shadow: 0 5px 15px rgba(156, 125, 3, 0.2);
 }
 
 .tooltip {
@@ -55,24 +148,67 @@ main {
 
 .tooltip .tooltiptext {
     visibility: hidden;
-    width: 80px;
-    background-color: black;
+    width: 120px;
+    background: linear-gradient(135deg, #001a3f, #002c66);
     color: #fff;
     text-align: center;
-    border-radius: 5px;
-    padding: 5px;
+    border-radius: 8px;
+    padding: 8px 12px;
     position: absolute;
-    z-index: 1;
-    top: 125%;
+    z-index: 1000;
+    bottom: -45px;
     left: 50%;
-    margin-left: -40px;
+    transform: translateX(-50%);
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+}
+
+.tooltip .tooltiptext::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    margin-left: -8px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: transparent transparent #001a3f transparent;
 }
 
 .tooltip:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
+    transform: translateX(-50%) translateY(-5px);
+}
+
+.cart-icon .tooltiptext::before {
+    content: 'Ver Carrito';
+}
+
+.login-icon .tooltiptext::before {
+    content: 'Mi Cuenta';
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #9c7d03;
+    color: white;
+    font-size: 12px;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    padding: 2px;
+    border: 2px solid #001a3f;
+    animation: popIn 0.3s forwards;
 }
 
 .profile-picture {
