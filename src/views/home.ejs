@@ -6,24 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bijou Boutique</title>
     <link rel="stylesheet" href="/css/styles.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"
-    />
-  </head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
   <body>
     <%- include("partials/header.ejs", { user: user }) %>
     <nav>
@@ -39,34 +24,35 @@
       </ul>
     </nav>
     <main>
-      <section class="slider">
-        <div class="slides">
-          <input type="radio" name="radio-btn" id="radio1" checked />
-          <input type="radio" name="radio-btn" id="radio2" />
-          <input type="radio" name="radio-btn" id="radio3" />
-
-          <div class="slide first">
-            <img src="/images/slider1.jpg" alt="Slider Image 1" />
+      <section class="slider-container">
+          <div class="swiper">
+              <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                      <img src="/images/slider1.jpg" alt="Slider Image 1" />
+                      <div class="slide-content">
+                          <h2>Bienvenido a Bijou Boutique</h2>
+                          <p>Descubre nuestra exclusiva colección</p>
+                      </div>
+                  </div>
+                  <div class="swiper-slide">
+                      <img src="/images/slider2.jpg" alt="Slider Image 2" />
+                      <div class="slide-content">
+                          <h2>Diseños Únicos</h2>
+                          <p>Calidad y elegancia en cada pieza</p>
+                      </div>
+                  </div>
+                  <div class="swiper-slide">
+                      <img src="/images/slider3.jpg" alt="Slider Image 3" />
+                      <div class="slide-content">
+                          <h2>Colección Premium</h2>
+                          <p>Joyas que cuentan historias</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="swiper-pagination"></div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
           </div>
-          <div class="slide">
-            <img src="/images/slider2.jpg" alt="Slider Image 2" />
-          </div>
-          <div class="slide">
-            <img src="/images/slider3.jpg" alt="Slider Image 3" />
-          </div>
-
-          <div class="navigation-auto">
-            <div class="auto-btn1"></div>
-            <div class="auto-btn2"></div>
-            <div class="auto-btn3"></div>
-          </div>
-        </div>
-
-        <div class="navigation-manual">
-          <label for="radio1" class="manual-btn"></label>
-          <label for="radio2" class="manual-btn"></label>
-          <label for="radio3" class="manual-btn"></label>
-        </div>
       </section>
 
       <section class="main-section">
@@ -156,5 +142,27 @@
         setInterval(nextSlide, 5000);
       });
     </script>
-  </body>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script>
+            const swiper = new Swiper('.swiper', {
+                loop: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                effect: 'fade',
+                fadeEffect: {
+                    crossFade: true
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+        </script>
+    </body>
 </html>
