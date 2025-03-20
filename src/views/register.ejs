@@ -77,7 +77,14 @@
           </select>
 
           <br />
-          <input type="file" name="image" />
+          <div class="file-input">
+            <label for="image">
+              <i class="bx bx-upload"></i>
+              Seleccionar imagen de perfil
+            </label>
+            <input type="file" name="image" id="image" accept="image/*" />
+            <div class="file-name"></div>
+          </div>
           <input class="submit" type="submit" />
           <input
             class="submit reset"
@@ -103,6 +110,20 @@
           passwordInput.type = "password";
           eyeIcon.classList.remove("bx-hide");
           eyeIcon.classList.add("bx-show");
+        }
+      });
+    </script>
+    <script>
+      const fileInput = document.querySelector(
+        '.file-input input[type="file"]'
+      );
+      const fileName = document.querySelector(".file-name");
+
+      fileInput.addEventListener("change", function () {
+        if (this.files[0]) {
+          fileName.textContent = this.files[0].name;
+        } else {
+          fileName.textContent = "";
         }
       });
     </script>

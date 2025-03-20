@@ -131,13 +131,40 @@ h2::after {
 .file-input {
     width: 100%;
     margin-bottom: 25px;
+    position: relative;
 }
 
 .file-input label {
-    display: block;
-    margin-bottom: 10px;
+    display: inline-block;
+    padding: 12px 20px;
+    background: linear-gradient(to right, #001a3f, #002c66);
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    text-align: center;
+    width: 100%;
+}
+
+.file-input label:hover {
+    background: linear-gradient(to right, #9c7d03, #d4af37);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(156, 125, 3, 0.3);
+}
+
+.file-input input[type="file"] {
+    opacity: 0;
+    width: 0.1px;
+    height: 0.1px;
+    position: absolute;
+}
+
+.file-input .file-name {
+    margin-top: 10px;
+    font-size: 14px;
     color: #001a3f;
-    font-weight: 500;
+    text-align: center;
 }
 
 .file-input input[type="file"] {
