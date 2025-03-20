@@ -47,15 +47,15 @@
           <% if (errors && errors.password) { %>
           <div class="text-danger"><%= errors.password.msg %></div>
           <% } %>
-          <div class="password-container">
+          <div class="container-password">
             <input
-              class="controls pass-control"
+              class="pass-control"
               id="pass"
               name="password"
               type="password"
               placeholder="Contraseña"
             />
-            <i id="bx" class="bx bx-show-alt toggle-password"></i>
+            <i id="togglePassword" class="bx bx-show"></i>
           </div>
           <% if (errors && errors.email) { %>
           <div class="text-danger"><%= errors.email.msg %></div>
@@ -89,5 +89,22 @@
     </main>
     <%- include("partials/footer.ejs") %>
     <script src="/js/validate.js"></script>
+    <!-- Justo antes del cierre del body -->
+    <script>
+      const passwordInput = document.querySelector(".pass-control");
+      const eyeIcon = document.querySelector(".bx");
+
+      eyeIcon.addEventListener("click", () => {
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+          eyeIcon.classList.remove("bx-show");
+          eyeIcon.classList.add("bx-hide");
+        } else {
+          passwordInput.type = "password";
+          eyeIcon.classList.remove("bx-hide");
+          eyeIcon.classList.add("bx-show");
+        }
+      });
+    </script>
   </body>
 </html>
