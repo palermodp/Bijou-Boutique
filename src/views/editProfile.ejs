@@ -10,8 +10,21 @@
   <body>
     <%- include("partials/header.ejs", { user: user }) %>
     <main>
+      <h1 class="section-title">Editar Perfil</h1>
       <div class="form-container">
-        <form action="/profile/edit" method="POST">
+        <form action="/profile/edit" method="POST" enctype="multipart/form-data">
+          <div class="profile-image-upload">
+            <img 
+              src="/images/users/<%= user.image %>" 
+              alt="Profile picture" 
+              class="current-profile-image"
+              id="preview-image"
+            >
+            <div class="image-upload-wrapper">
+              <label for="image" class="image-upload-label">Cambiar imagen de perfil</label>
+              <input type="file" id="image" name="image" accept="image/*" class="image-input">
+            </div>
+          </div>
           <div class="form-group">
             <label for="name">Nombre:</label>
             <input
@@ -19,7 +32,7 @@
               id="name"
               name="name"
               value="<%= user.name %>"
-              class="controls"
+              class="form-control"
             />
           </div>
           <div class="form-group">
@@ -29,7 +42,7 @@
               id="surname"
               name="surname"
               value="<%= user.surname %>"
-              class="controls"
+              class="form-control"
             />
           </div>
           <div class="form-group">
@@ -39,22 +52,35 @@
               id="email"
               name="email"
               value="<%= user.email %>"
-              class="controls"
+              class="form-control"
             />
           </div>
           <div class="form-group">
             <label for="role">Rol:</label>
-            <select id="role" name="role" class="controls">
+            <select id="role" name="role" class="form-control">
               <option value="user" <%= user.role === 'user' ? 'selected' : '' %>>Usuario</option>
               <option value="admin" <%= user.role === 'admin' ? 'selected' : '' %>>Administrador</option>
             </select>
           </div>
           <div class="form-group">
-            <button type="submit" class="btn-primary">Guardar cambios</button>
+            <button type="submit" class="submit-button">Guardar cambios</button>
           </div>
         </form>
       </div>
     </main>
     <%- include("partials/footer.ejs") %>
+    <!-- Agregar antes del cierre del body -->
+    <script>
+      document.getElementById('image').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            document.getElementById('preview-image').src = e.target.result;
+          }
+          reader.readAsDataURL(file);
+        }
+      });
+    </script>
   </body>
 </html>

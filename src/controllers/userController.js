@@ -166,33 +166,49 @@ const userController = {
       return res.redirect("/login");
     }
 
-    const { name, surname, email, role } = req.body;
-    const updateData = { 
-      name, 
-      surname, 
-      email, 
-      role,
-      image: req.file ? req.file.filename : user.image
-    };
-
     try {
-      await db.User.update(
-        updateData,
-        { where: { id: user.id } }
+      console.log('ID del usuario:', user.id);
+      console.log('Datos del formulario:', req.body);
+      console.log('Archivo:', req.file);
+
+      // Verificar que tenemos todos los datos necesarios
+      if (!req.body.name || !req.body.surname || !req.body.email) {
+        throw new Error('Faltan datos requeridos');
+      }
+
+      // Actualizar usuario
+      const result = await db.User.update(
+        {
+          name: req.body.name,
+          surname: req.body.surname,
+          email: req.body.email,
+          role: req.body.role,
+          image: req.file ? req.file.filename : user.image
+        },
+        { 
+          where: { id: user.id },
+          returning: true
+        }
       );
 
-      // Actualizar la sesión con todos los datos, incluida la imagen
-      req.session.usuarioLogueado = {
-        ...user,
-        ...updateData
-      };
+      console.log('Resultado de la actualización:', result);
+
+      // Obtener usuario actualizado
+      const updatedUser = await db.User.findByPk(user.id);
+      console.log('Usuario actualizado:', updatedUser);
+
+      // Actualizar sesión
+      req.session.usuarioLogueado = updatedUser;
 
       return res.redirect("/profile");
     } catch (error) {
-      console.log(error);
-      res.status(500).send({ error: error.message });
+      console.error("Error al actualizar perfil:", error);
+      return res.render("editProfile", {
+        user: user,
+        errors: [{ msg: "Error al actualizar el perfil: " + error.message }]
+      });
     }
-}
+  }, // <-- Faltaba esta coma
   updatePass: (req, res) => {
     return res.render("updatePass", {
       user: req.session.usuarioLogueado,
