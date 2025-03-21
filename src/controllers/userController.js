@@ -167,24 +167,32 @@ const userController = {
     }
 
     const { name, surname, email, role } = req.body;
+    const updateData = { 
+      name, 
+      surname, 
+      email, 
+      role,
+      image: req.file ? req.file.filename : user.image
+    };
 
     try {
       await db.User.update(
-        { name, surname, email, role },
+        updateData,
         { where: { id: user.id } }
       );
 
-      req.session.usuarioLogueado.name = name;
-      req.session.usuarioLogueado.surname = surname;
-      req.session.usuarioLogueado.email = email;
-      req.session.usuarioLogueado.role = role;
+      // Actualizar la sesión con todos los datos, incluida la imagen
+      req.session.usuarioLogueado = {
+        ...user,
+        ...updateData
+      };
 
       return res.redirect("/profile");
     } catch (error) {
       console.log(error);
       res.status(500).send({ error: error.message });
     }
-  },
+}
   updatePass: (req, res) => {
     return res.render("updatePass", {
       user: req.session.usuarioLogueado,

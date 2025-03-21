@@ -14,68 +14,50 @@
   </head>
   <body>
     <%- include("partials/header.ejs", { user: user }) %>
+    <h1 class="section-title">Añadir Productos</h1>
     <form action="/products/create" method="POST" enctype="multipart/form-data">
       <div class="form-container">
         <div class="form-group">
-          <label for="name">Nombre del producto:</label>
-          <br />
-          <input type="text" class="controls" id="name" name="name" required />
+          <label for="name">Nombre del producto</label>
+          <input type="text" class="form-control" id="name" name="name" required />
           <% if (errors && errors.name) { %>
-          <div class="text-danger"><%= errors.name.msg %></div>
+          <div class="error-message"><%= errors.name.msg %></div>
           <% } %>
         </div>
+        
         <div class="form-group">
-          <label for="description">Descripción:</label>
-          <br />
-          <textarea
-            class="controls"
-            id="description"
-            name="description"
-            rows="3"
-            required
-          ></textarea>
+          <label for="description">Descripción</label>
+          <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
           <% if (errors && errors.description) { %>
-          <div class="text-danger"><%= errors.description.msg %></div>
+          <div class="error-message"><%= errors.description.msg %></div>
           <% } %>
         </div>
+
         <div class="form-group">
-          <label for="image">Imagen:</label>
-          <br />
+          <label for="image">Imagen</label>
           <input type="file" class="form-control" id="image" name="image" />
           <% if (errors && errors.image) { %>
-          <div class="text-danger"><%= errors.image.msg %></div>
+          <div class="error-message"><%= errors.image.msg %></div>
           <% } %>
         </div>
+
         <div class="form-group">
-          <label for="color">Colores:</label>
-          <br />
-          <input
-            type="text"
-            class="controls"
-            id="color"
-            name="color"
-            placeholder="Ejemplo: negro, blanco, rojo"
-          />
+          <label for="color">Colores</label>
+          <input type="text" class="form-control" id="color" name="color" placeholder="Ejemplo: negro, blanco, rojo" />
           <% if (errors && errors.color) { %>
-          <div class="text-danger"><%= errors.color.msg %></div>
+          <div class="error-message"><%= errors.color.msg %></div>
           <% } %>
         </div>
+
         <div class="form-group">
-          <label for="price">Precio:</label>
-          <br />
-          <input
-            type="number"
-            class="controls"
-            id="price"
-            name="price"
-            step="0.01"
-            required
-          />
+          <label for="price">Precio</label>
+          <input type="number" class="form-control" id="price" name="price" step="0.01" required />
           <% if (errors && errors.price) { %>
-          <div class="text-danger"><%= errors.price.msg %></div>
+          <div class="error-message"><%= errors.price.msg %></div>
           <% } %>
         </div>
-        <button type="submit" class="btn btn-primary">Guardar</button>
+
+        <button type="submit" class="submit-button">Guardar Producto</button>
       </div>
     </form>
     <%- include("partials/footer.ejs") %>

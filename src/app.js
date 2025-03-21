@@ -1,7 +1,7 @@
 const express = require("express");
-const indexRoutes = require("../src/routers/index.routes");
-const productRoutes = require("../src/routers/product.routes");
-const userRoutes = require("../src/routers/user.routes");
+const indexRoutes = require("./routes/index.routes");
+const productRoutes = require("./routes/product.routes");
+const userRoutes = require("./routes/user.routes");
 const path = require("path");
 const methodOverride = require("method-override");
 const session = require("express-session");
@@ -23,11 +23,11 @@ app.use(
   session({
     secret: "secret",
     resave: false,
-    saveUninitialized: false,  // Cambiado a false por seguridad
+    saveUninitialized: false,
     cookie: {
-      secure: false, // Cambiar a true si usas HTTPS
-      maxAge: 1000 * 60 * 60 * 24 // 24 horas
-    }
+      secure: false,
+      maxAge: 1000 * 60 * 60 * 24,
+    },
   })
 );
 

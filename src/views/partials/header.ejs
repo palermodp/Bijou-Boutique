@@ -31,14 +31,14 @@
         </div>
         <div class="tooltip">
           <a href="/profile">
-            <% if (user.image) { %>
-            <img
-              src="/images/users/<%= user.image %>"
-              alt="Foto de perfil"
-              class="profile-picture"
-            />
+            <% if (user && user.image) { %>
+              <img 
+                src="/images/users/<%= user.image %>" 
+                alt="<%= user.name %>'s profile" 
+                class="profile-picture"
+              >
             <% } else { %>
-            <i class="fa-solid fa-user"></i>
+              <i class="fa-solid fa-user"></i>
             <% } %>
           </a>
           <span class="tooltiptext">Perfil</span>

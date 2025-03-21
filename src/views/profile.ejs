@@ -11,13 +11,22 @@
     <%- include("partials/header.ejs", { user: user }) %>
     <div class="container">
       <h1 class="profile-title">Editar Perfil</h1>
-      <div class="profile-content">
-        <div class="left-box">
-          <img
-            src="/images/users/<%= user.image %>"
-            alt="Imagen de perfil"
-            class="profile-image"
-          />
+      <div class="profile-container">
+        <div class="profile-image-container">
+          <% if (user && user.image) { %>
+            <img 
+              src="/images/users/<%= user.image %>" 
+              alt="<%= user.name %>'s profile picture" 
+              class="profile-image"
+              onerror="this.onerror=null; this.src='/images/default-avatar.png';"
+            >
+          <% } else { %>
+            <img 
+              src="/images/default-avatar.png" 
+              alt="Default profile picture" 
+              class="profile-image"
+            >
+          <% } %>
         </div>
         <div class="right-box">
           <p>Nombre: <%= user.name %></p>

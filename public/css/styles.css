@@ -127,18 +127,17 @@ main {
 }
 
 .profile-picture {
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
-    border: 2px solid transparent;
     object-fit: cover;
-    transition: all 0.4s ease;
+    border: 2px solid #f5b971;
+    transition: all 0.3s ease;
 }
 
 .profile-picture:hover {
-    transform: translateY(-3px) scale(1.05);
-    border-color: #9c7d03;
-    box-shadow: 0 5px 15px rgba(156, 125, 3, 0.2);
+    transform: scale(1.1);
+    border-color: #1e3d59;
 }
 
 .tooltip {
@@ -209,19 +208,6 @@ main {
     padding: 2px;
     border: 2px solid #001a3f;
     animation: popIn 0.3s forwards;
-}
-
-.profile-picture {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    object-fit: cover;
-    transition: transform 0.3s, border-color 0.3s;
-}
-
-.profile-picture:hover {
-    transform: scale(1.1);
-    border-color: #9c7d03;
 }
 
 nav {
@@ -1025,6 +1011,16 @@ main {
     transform: scale(1);
 }
 
+.icons-container a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    text-decoration: none; 
+    color: inherit;
+}
+
 .cart-icon {
     position: relative;
 }
@@ -1060,12 +1056,13 @@ main {
 }
 
 .profile-picture {
-    width: 35px;
-    height: 35px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
-    border: 2px solid transparent;
     object-fit: cover;
-    transition: all 0.4s ease;
+    border: 2px solid #f5b971;
+    transition: all 0.3s ease;
+    display: block;
 }
 
 .profile-picture:hover {
