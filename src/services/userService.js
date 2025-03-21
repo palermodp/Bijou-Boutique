@@ -11,7 +11,9 @@ const userService = {
     return await db.User.create(usuarioContraseñaEncriptada);
   },
   getUserByEmail: async function (email) {
-    return await db.User.findOne({ where: { email: email } });
+    const user = await db.User.findOne({ where: { email: email } });
+    console.log('Usuario encontrado:', user ? 'Sí' : 'No');
+    return user;
   },
 };
 

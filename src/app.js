@@ -23,7 +23,11 @@ app.use(
   session({
     secret: "secret",
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,  // Cambiado a false por seguridad
+    cookie: {
+      secure: false, // Cambiar a true si usas HTTPS
+      maxAge: 1000 * 60 * 60 * 24 // 24 horas
+    }
   })
 );
 

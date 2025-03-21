@@ -15,12 +15,13 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     password: {
-      type: DataTypes.STRING(95),
+      type: DataTypes.STRING(255),
       allowNull: false,
     },
     email: {
       type: DataTypes.STRING(95),
       allowNull: false,
+      unique: true,
     },
     role: {
       type: DataTypes.STRING(95),
@@ -28,13 +29,15 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: "user",
     },
     image: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(255),
       allowNull: false,
+      defaultValue: "default-user.png",
     },
   };
   let config = {
     timestamps: false,
     tableName: "users",
+    paranoid: false,
   };
   const User = sequelize.define(alias, cols, config);
 

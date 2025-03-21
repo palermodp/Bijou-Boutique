@@ -9,12 +9,7 @@ const { checkLoggedIn } = require("../middlewares/sessionMiddleware");
 const validations = require("../middlewares/validationMiddleware");
 const { passwordValidation } = require("../middlewares/passwordValidation");
 
-router.get(
-  "/login",
-  guestMiddleware,
-  upload.single("image"),
-  userController.login
-);
+router.get("/login", guestMiddleware, userController.login);
 router.get("/success", userController.success);
 router.post("/login", loginValidation, userController.processLogin);
 router.get("/profile", authMiddleware, userController.profile);
@@ -27,7 +22,6 @@ router.get("/updatePass", userController.updatePass);
 
 router.post("/updatePass", passwordValidation, userController.updatePassword);
 
-// Rutas accesibles solo sin loguear
 router.get("/register", guestMiddleware, userController.register);
 router.get("/contactUs", userController.contact);
 router.post(

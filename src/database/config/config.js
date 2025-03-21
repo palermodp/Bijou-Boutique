@@ -1,4 +1,11 @@
 require("dotenv").config();
+
+console.log("Intentando conectar a la base de datos:", {
+  database: process.env.DB_NAME,
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER
+});
+
 module.exports = {
   development: {
     username: process.env.DB_USER,
@@ -6,6 +13,11 @@ module.exports = {
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
     dialect: "mysql",
+    logging: true,
+    define: {
+      timestamps: true,
+      underscored: true
+    }
   },
   test: {
     username: "root",

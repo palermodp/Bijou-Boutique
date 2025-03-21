@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const emailInput = document.getElementById("user");
   const pass = document.getElementById("pass");
-  const icon = document.getElementById("bx");
+  const icon = document.getElementById("togglePassword"); // Cambiado de "bx" a "togglePassword"
   const form = document.getElementById("loginForm");
 
   if (!emailInput) {
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.error("Elemento #pass no encontrado");
   }
   if (!icon) {
-    console.error("Elemento #bx no encontrado");
+    console.error("Elemento #togglePassword no encontrado");
   }
   if (!form) {
     console.error("Elemento #loginForm no encontrado");

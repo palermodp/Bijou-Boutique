@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="website icon" type="png" href="images/brandmark@2x-8.png" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Carrito</title>
+    <title>Carrito | Bijou Boutique</title>
     <link rel="stylesheet" href="/css/cart.css" />
   </head>
   <body>
     <%- include("partials/header.ejs", { user: user }) %>
-    <h1>Aun no tienes articulos en tu carrito!</h1>
-    <div class="img-container">
-      <img
-        src="../../images/carrito.jpg"
-        alt="mantenimiento"
-        class="mantenimiento"
-      />
-    </div>
-    <div>
-      <% if (user) { %>
-      <a href="/products"
-        ><button class="loguear">Descubrir productos</button></a
-      >
-      <a href="/"><button class="regresar">Volver al inicio</button></a>
-      <% } else { %>
-      <a href="/products"
-        ><button class="loguear">Descubrir productos</button></a
-      >
-      <a href="/login"><button class="regresar">Iniciar sesion</button></a>
-      <% } %>
-    </div>
+    <main>
+      <div class="cart-container">
+        <h2>Mi Carrito</h2>
+        <div class="empty-cart">
+          <div class="img-container">
+            <img src="../../images/carrito.jpg" alt="Carrito vacío" class="cart-image" />
+          </div>
+          <p class="empty-message">¡Tu carrito está vacío!</p>
+          <p class="sub-message">Descubre nuestra colección de joyas exclusivas</p>
+          
+          <div class="button-group">
+            <% if (user) { %>
+              <a href="/products" class="btn primary">Descubrir productos</a>
+              <a href="/" class="btn secondary">Volver al inicio</a>
+            <% } else { %>
+              <a href="/products" class="btn primary">Descubrir productos</a>
+              <a href="/login" class="btn secondary">Iniciar sesión</a>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </main>
     <%- include("partials/footer.ejs") %>
   </body>
 </html>

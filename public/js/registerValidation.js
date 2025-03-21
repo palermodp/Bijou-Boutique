@@ -1,55 +1,83 @@
-function validateForm(event) {
-  const inputs = document.querySelectorAll(".controls");
-  event.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("registerForm");
+  const nameInput = document.getElementById("name");
+  const surnameInput = document.getElementById("surname");
+  const emailInput = document.getElementById("mail");
+  const passwordInput = document.getElementById("pass");
+  const roleInput = document.getElementById("role");
+  const imageInput = document.getElementById("image");
+  const togglePassword = document.getElementById("togglePassword");
 
-  inputs.forEach(function (input) {
-    input.style.backgroundColor = "white";
+  if (form) {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
 
-    if (input.id === "name") {
-      if (input.value.length < 3) {
-        alert("El nombre debe tener al menos 3 caracteres.");
-        input.style.backgroundColor = "lightblue";
-        return false;
+      let isValid = true;
+      const errors = [];
+
+      if (!nameInput.value.trim()) {
+        errors.push("El nombre es requerido");
+        isValid = false;
       }
-    }
 
-    if (input.id === "surname") {
-      if (input.value.length < 3) {
-        alert("El apellido debe tener al menos 3 caracteres.");
-        input.style.backgroundColor = "lightblue";
-        return false;
+      if (!surnameInput.value.trim()) {
+        errors.push("El apellido es requerido");
+        isValid = false;
       }
-    }
 
-    if (input.id === "pass") {
-      const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&])[A-Za-z\d!@#$%^&]{8,}$/;
-      if (!passwordRegex.test(input.value)) {
-        alert(
-          "La contraseña debe tener al menos 8 caracteres, un número y un caracter especial."
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(emailInput.value)) {
+        errors.push("Email inválido");
+        isValid = false;
+      }
+
+      const passwordRegex =
+        /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+      if (!passwordRegex.test(passwordInput.value)) {
+        errors.push(
+          "La contraseña debe tener al menos 8 caracteres, un número y un caracter especial"
         );
-        input.style.backgroundColor = "lightblue";
-        return false;
+        isValid = false;
       }
-    }
-  });
 
-  event.target.submit();
-}
+      // Validación de imagen
+      if (imageInput && imageInput.files.length > 0) {
+        const file = imageInput.files[0];
+        const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        
+        if (!validTypes.includes(file.type)) {
+          errors.push("El archivo debe ser una imagen (JPEG, PNG o GIF)");
+          isValid = false;
+        }
 
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.querySelector("form");
-  form.addEventListener("submit", validateForm);
-});
+        if (file.size > 5000000) { // 5MB
+          errors.push("La imagen no debe superar los 5MB");
+          isValid = false;
+        }
+      }
 
-document.addEventListener("DOMContentLoaded", function (event) {
-  const passwordInput = document.querySelector("#pass");
-  const togglePassword = document.querySelector("#bx");
+      if (isValid) {
+        console.log('Enviando formulario con datos:', {
+          name: nameInput.value,
+          surname: surnameInput.value,
+          email: emailInput.value,
+          role: roleInput.value,
+          image: imageInput.files[0]?.name
+        });
+        form.submit();
+      } else {
+        alert(errors.join("\n"));
+      }
+    });
+  }
 
-  togglePassword.addEventListener("click", function () {
-    const type =
-      passwordInput.getAttribute("type") === "password" ? "text" : "password";
-    passwordInput.setAttribute("type", type);
-    this.classList.toggle("bx-show");
-    this.classList.toggle("bx-hide");
-  });
+  // Toggle de contraseña
+  if (togglePassword && passwordInput) {
+    togglePassword.addEventListener("click", () => {
+      const type = passwordInput.type === "password" ? "text" : "password";
+      passwordInput.type = type;
+      togglePassword.classList.toggle("bx-show");
+      togglePassword.classList.toggle("bx-hide");
+    });
+  }
 });

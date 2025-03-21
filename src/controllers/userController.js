@@ -10,27 +10,66 @@ const userController = {
     });
   },
   processLogin: async (req, res) => {
-    let errors = validationResult(req);
+    try {
+      let errors = validationResult(req);
+      console.log("\n=== DETALLES DEL INTENTO DE LOGIN ===");
+      console.log("1. Datos del formulario:", {
+        email: req.body.email,
+        contraseñaRecibida: req.body.password,
+        longitudContraseña: req.body.password?.length,
+      });
 
-    if (errors.isEmpty()) {
-      let user = await userService.getUserByEmail(req.body.email);
+      if (errors.isEmpty()) {
+        let user = await userService.getUserByEmail(req.body.email);
+        console.log("2. Resultado de la búsqueda en BD:", {
+          usuarioEncontrado: !!user,
+          datosUsuario: user
+            ? {
+                id: user.id,
+                email: user.email,
+                hashGuardado: user.password,
+                rol: user.role,
+              }
+            : null,
+        });
 
-      if (user && bcrypt.compareSync(req.body.password, user.password)) {
-        req.session.usuarioLogueado = user;
+        if (user) {
+          const passwordMatch = bcrypt.compareSync(
+            req.body.password,
+            user.password
+          );
+          console.log("3. Resultado de verificación:", passwordMatch);
 
-        if (req.body.recordame === "recordar") {
-          res.cookie("recordame", user.email, { maxAge: 600000 });
+          if (passwordMatch) {
+            req.session.usuarioLogueado = user;
+
+            if (req.body.recordame === "recordar") {
+              res.cookie("recordame", user.email, { maxAge: 600000 });
+            }
+
+            return res.redirect("/success");
+          }
         }
 
-        return res.redirect("/success");
-      } else {
         return res.render("login", {
           errors: [{ msg: "Credenciales inválidas!" }],
+          oldData: { email: req.body.email },
+          user: null,
+        });
+      } else {
+        return res.render("login", {
+          errors: errors.errors,
+          oldData: req.body,
           user: null,
         });
       }
-    } else {
-      return res.render("login", { errors: errors.errors, user: null });
+    } catch (error) {
+      console.error("Error en login:", error);
+      return res.render("login", {
+        errors: [{ msg: "Error al procesar el login" }],
+        oldData: req.body,
+        user: null,
+      });
     }
   },
   logout: (req, res) => {
@@ -59,32 +98,48 @@ const userController = {
     return res.render("register", { errors: validationResult, user: null });
   },
   create: async (req, res) => {
-    const resultValidations = validationResult(req);
-
-    if (resultValidations.errors.length > 0) {
-      return res.render("register", {
-        errors: resultValidations.mapped(),
-        oldData: req.body,
-        user: null,
-      });
-    }
-
-    const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-
     try {
+      const existingUser = await db.User.findOne({
+        where: { email: req.body.email },
+      });
+
+      if (existingUser) {
+        return res.render("register", {
+          errors: [{ msg: "El email ya está registrado" }],
+          oldData: req.body,
+          user: null,
+        });
+      }
+
+      const hashedPassword = bcrypt.hashSync(req.body.password, 10);
+
       const newUser = await db.User.create({
         name: req.body.name,
         surname: req.body.surname,
         password: hashedPassword,
         email: req.body.email,
-        image: req.file ? req.file.filename : null,
-        role: req.body.role,
+        image: req.file ? req.file.filename : "default-user.png",
+        role: req.body.role || "user",
       });
 
-      res.redirect("/login");
+      console.log("Usuario creado:", {
+        id: newUser.id,
+        email: newUser.email,
+        name: newUser.name,
+      });
+
+      return res.redirect("/login");
     } catch (error) {
-      console.log(error);
-      res.status(500).send({ error: error.message });
+      console.error("Error al crear usuario:", {
+        message: error.message,
+        stack: error.stack,
+      });
+
+      return res.render("register", {
+        errors: [{ msg: "Error al crear el usuario" }],
+        oldData: req.body,
+        user: null,
+      });
     }
   },
   contact: (req, res) => {

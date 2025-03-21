@@ -3,13 +3,12 @@ const path = require("path");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    console.log("Multer storage destination");
+    console.log("Guardando imagen en:", "./public/images/users");
     cb(null, "./public/images/users");
   },
   filename: (req, file, cb) => {
-    const newFileName =
-      "products-" + Date.now() + path.extname(file.originalname);
-    console.log("Multer storage filename: ", newFileName);
+    const newFileName = `user-${Date.now()}${path.extname(file.originalname)}`;
+    console.log("Nombre del archivo:", newFileName);
     cb(null, newFileName);
   },
 });
