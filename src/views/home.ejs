@@ -6,10 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bijou Boutique</title>
     <link rel="stylesheet" href="/css/styles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+  </head>
   <body>
+    <div id="welcome-alert" class="welcome-alert"></div>
     <%- include("partials/header.ejs", { user: user }) %>
     <nav>
       <ul>
@@ -25,36 +35,35 @@
     </nav>
     <main>
       <section class="slider-container">
-          <div class="swiper">
-              <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-                      <img src="/images/slider1.jpg" alt="Slider Image 1" />
-                      <div class="slide-content">
-                          <h2>Bienvenido a Bijou Boutique</h2>
-                          <p>Descubre nuestra exclusiva colección</p>
-                      </div>
-                  </div>
-                  <div class="swiper-slide">
-                      <img src="/images/slider2.jpg" alt="Slider Image 2" />
-                      <div class="slide-content">
-                          <h2>Diseños Únicos</h2>
-                          <p>Calidad y elegancia en cada pieza</p>
-                      </div>
-                  </div>
-                  <div class="swiper-slide">
-                      <img src="/images/slider3.jpg" alt="Slider Image 3" />
-                      <div class="slide-content">
-                          <h2>Colección Premium</h2>
-                          <p>Joyas que cuentan historias</p>
-                      </div>
-                  </div>
+        <div class="swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="/images/slider1.jpg" alt="Slider Image 1" />
+              <div class="slide-content">
+                <h2>Bienvenido a Bijou Boutique</h2>
+                <p>Descubre nuestra exclusiva colección</p>
               </div>
-              <div class="swiper-pagination"></div>
-              <div class="swiper-button-prev"></div>
-              <div class="swiper-button-next"></div>
+            </div>
+            <div class="swiper-slide">
+              <img src="/images/slider2.jpg" alt="Slider Image 2" />
+              <div class="slide-content">
+                <h2>Diseños Únicos</h2>
+                <p>Calidad y elegancia en cada pieza</p>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <img src="/images/slider3.jpg" alt="Slider Image 3" />
+              <div class="slide-content">
+                <h2>Colección Premium</h2>
+                <p>Joyas que cuentan historias</p>
+              </div>
+            </div>
           </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
       </section>
-
       <section class="main-section">
         <img src="/images/joyas.jpg" alt="Imagen grande" />
         <div class="image-info">
@@ -71,7 +80,8 @@
             <img src="/images/novedades1.png" alt="Novedad 1" />
             <h3>¿Te gustaria conocer sobre nuestra historia?</h3>
             <p>
-              ¡Aqui encontraras el como nacio Bijou Boutique y todo su recorrido!
+              ¡Aqui encontraras el como nacio Bijou Boutique y todo su
+              recorrido!
             </p>
             <a href="/aboutUs">Leer más</a>
           </article>
@@ -79,8 +89,8 @@
             <img src="/images/novedades2.png" alt="Novedad 2" />
             <h3>¿Queres ser parte de Bijou Boutique?</h3>
             <p>
-              ¡Contactanos y podras quedar seleccionado para ser parte de nuestro
-              equipo!
+              ¡Contactanos y podras quedar seleccionado para ser parte de
+              nuestro equipo!
             </p>
             <a href="/contactUs">Leer más</a>
           </article>
@@ -145,26 +155,56 @@
       });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-        <script>
-            const swiper = new Swiper('.swiper', {
-                loop: true,
-                autoplay: {
-                    delay: 5000,
-                    disableOnInteraction: false,
-                },
-                effect: 'fade',
-                fadeEffect: {
-                    crossFade: true
-                },
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-            });
-        </script>
-    </body>
+    <script>
+      const swiper = new Swiper(".swiper", {
+        loop: true,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
+        effect: "fade",
+        fadeEffect: {
+          crossFade: true,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    </script>
+  </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const welcomeName = urlParams.get("welcome");
+        const logout = urlParams.get("logout");
+
+        if (welcomeName) {
+            const alert = document.getElementById("welcome-alert");
+            alert.textContent = `¡Bienvenido/a ${welcomeName}!`;
+            alert.classList.add("show");
+
+            setTimeout(() => {
+                alert.classList.remove("show");
+            }, 3000);
+        }
+
+        if (logout) {
+            const alert = document.getElementById("welcome-alert");
+            alert.textContent = "¡Sesión cerrada correctamente!";
+            alert.classList.add("show");
+
+            setTimeout(() => {
+                alert.classList.remove("show");
+            }, 3000);
+        }
+
+        // Limpiar la URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+    });
+  </script>
 </html>

@@ -21,24 +21,12 @@ const userController = {
 
       if (errors.isEmpty()) {
         let user = await userService.getUserByEmail(req.body.email);
-        console.log("2. Resultado de la búsqueda en BD:", {
-          usuarioEncontrado: !!user,
-          datosUsuario: user
-            ? {
-                id: user.id,
-                email: user.email,
-                hashGuardado: user.password,
-                rol: user.role,
-              }
-            : null,
-        });
 
         if (user) {
           const passwordMatch = bcrypt.compareSync(
             req.body.password,
             user.password
           );
-          console.log("3. Resultado de verificación:", passwordMatch);
 
           if (passwordMatch) {
             req.session.usuarioLogueado = user;
@@ -47,10 +35,9 @@ const userController = {
               res.cookie("recordame", user.email, { maxAge: 600000 });
             }
 
-            return res.redirect("/success");
+            return res.redirect(`/?welcome=${encodeURIComponent(user.name)}`);
           }
         }
-
         return res.render("login", {
           errors: [{ msg: "Credenciales inválidas!" }],
           oldData: { email: req.body.email },
@@ -78,7 +65,7 @@ const userController = {
         return res.status(500).send("No se pudo cerrar sesión");
       }
       res.clearCookie("recordame");
-      return res.redirect("/login");
+      return res.redirect("/?logout=true");
     });
   },
   perfil: (req, res) => {
@@ -89,11 +76,12 @@ const userController = {
 
     return res.render("home", { user });
   },
-  success: function (req, res) {
-    res.render("success", {
-      user: req.session.usuarioLogueado,
-    });
-  },
+  // Eliminar completamente este método ya que no lo usaremos más
+  // success: function (req, res) {
+  //     res.render("success", {
+  //         user: req.session.usuarioLogueado,
+  //     });
+  // },
   register: (req, res) => {
     return res.render("register", { errors: validationResult, user: null });
   },
