@@ -10,22 +10,25 @@
   <body>
     <%- include("partials/header.ejs", { user: user }) %>
     <div class="container">
-      <div class="left-box">
-        <img
-          src="/images/users/<%= user.image %>"
-          alt="Imagen de perfil"
-          class="profile-image"
-        />
-      </div>
-      <div class="right-box">
-        <p>Nombre: <%= user.name %></p>
-        <p>Apellido: <%= user.surname %></p>
-        <p>E-mail: <%= user.email %></p>
-        <a href="/updatePass" class="change-password">Cambiar contraseña</a>
-        <div class="buttons">
-          <button onclick="location.href='/'">Inicio</button>
-          <button onclick="location.href='/logout'">Cerrar sesión</button>
-          <button onclick="location.href='/profile/edit'">Editar perfil</button>
+      <h1 class="profile-title">Editar Perfil</h1>
+      <div class="profile-content">
+        <div class="left-box">
+          <img
+            src="/images/users/<%= user.image %>"
+            alt="Imagen de perfil"
+            class="profile-image"
+          />
+        </div>
+        <div class="right-box">
+          <p>Nombre: <%= user.name %></p>
+          <p>Apellido: <%= user.surname %></p>
+          <p>E-mail: <%= user.email %></p>
+          <a href="/updatePass" class="change-password">Cambiar contraseña</a>
+          <div class="buttons">
+            <button onclick="location.href='/'">Inicio</button>
+            <button onclick="location.href='/logout'">Cerrar sesión</button>
+            <button onclick="location.href='/profile/edit'">Editar perfil</button>
+          </div>
         </div>
       </div>
     </div>

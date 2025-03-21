@@ -15,30 +15,8 @@
     <title>Products</title>
   </head>
   <body>
-    <header>
-      <div class="logo-container">
-        <a href="/"
-          ><img src="/images/bijou-boutique.png" alt="Logo de la tienda"
-        /></a>
-      </div>
-      <div class="icons-container">
-        <a href="/login"><i class="fas fa-user"></i></a>
-        <div class="container-cart-icon">
-          <i class="fas fa-shopping-cart" id="cart-icon"></i>
-          <div class="count-products">
-            <span id="contador-productos">0</span>
-          </div>
-          <div class="container-cart-products hidden-cart">
-            <div class="row-product hidden"></div>
-            <div class="cart-total hidden">
-              <h3>Total:</h3>
-              <span class="total-pagar">$0.00</span>
-            </div>
-            <p class="cart-empty">El carrito está vacío</p>
-          </div>
-        </div>
-      </div>
-    </header>
+    <%- include("partials/header.ejs") %>
+    <h1 class="section-title">Productos</h1>
     <section class="product-section">
       <% products.forEach(product => { %>
       <article class="product-card">

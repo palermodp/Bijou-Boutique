@@ -1,77 +1,180 @@
 body {
     margin: 0;
     padding: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column; 
+    background-color: #f8f9fa;
 }
 
 .container {
+    max-width: 1000px;
+    margin: 1rem auto;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    gap: 2rem;
+    padding: 2rem;
+    min-height: calc(100vh - 300px);
+    flex-direction: column;
 }
 
-.left-box, .right-box {
-    padding: 20px;
-    margin: 10px;
+.profile-title {
+    text-align: center;
+    color: #1e3d59;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-bottom: 1rem;
 }
 
-.right-box {
-    border: 1px solid rgb(202, 162, 130);
-    border-radius: 10px;
+.profile-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background-color: #f5b971;
+}
+
+.profile-content {
+    display: flex;
+    gap: 2rem;
 }
 
 .left-box {
-    width: 300px;
-    height: 300px;
+    flex: 0 0 350px;
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    height: fit-content;
 }
 
 .profile-image {
-    width: 250px;
-    height: 250px;
-    border-radius: 10%;
-    margin: 25px;
-  }
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    border-radius: 16px;
+    object-fit: cover;
+    border: 3px solid #f5b971;
+}
 
 .right-box {
-    width: 300px;
-    height: 200px;
-}
-
-.right-box p {
-    margin: 5px 0;
-}
-
-.change-password {
-    display: block;
-    margin: 10px 0;
-    color: #001a3f;
-    text-decoration: none;
-}
-
-.change-password:hover {
-    color: #000307;
+    flex: 1;
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
 }
 
 .buttons {
     display: flex;
-    justify-content: space-between;
-    margin-top: 70px;
-    text-align: center; 
-    border-radius: 100%;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem; 
 }
 
+.profile-image {
+    width: 100%;
+    height: 100%;
+    max-height: 350px;
+    border-radius: 16px;
+    object-fit: cover;
+    border: 3px solid #f5b971;
+    display: block;
+    background-color: #f8f9fa; 
+}
+
+.left-box {
+    flex: 0 0 350px;
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.right-box p {
+    font-size: 1.1rem;
+    color: #1e3d59;
+    margin: 1rem 0;
+    padding: 0.8rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.change-password {
+    display: inline-block;
+    color: #1e3d59;
+    text-decoration: none;
+    font-weight: 600;
+    margin: 1rem 0;
+    padding: 0.8rem;
+    transition: color 0.3s ease;
+}
+
+.change-password:hover {
+    color: #f5b971;
+}
+
+.buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
 
 button {
-    padding: 5px 10px;
-    border: 1px solid rgb(202, 162, 130);
-    background-color: white;
-    border-radius: 4px;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    background-color: #1e3d59;
+    color: white;
+    border-radius: 8px;
     cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    flex: 1;
+    min-width: 150px;
+    box-shadow: 0 4px 6px rgba(30, 61, 89, 0.2);
 }
 
 button:hover {
-    background-color: #e0e0e0;
+    transform: translateY(-2px);
+    background-color: #2b5580;
+}
+
+button:nth-child(2) {
+    background-color: #f5b971;
+    color: #1e3d59;
+}
+
+button:nth-child(2):hover {
+    background-color: #f9c995;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .left-box {
+        flex: 0 0 auto;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+    }
 }
