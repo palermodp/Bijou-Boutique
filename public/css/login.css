@@ -82,12 +82,16 @@ h2::after {
     background: linear-gradient(to right, #001a3f, #9c7d03);
 }
 
-.controls {
+.form-group {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.form-control {
     width: 100%;
     color: #001a3f;
     padding: 15px 20px;
     border-radius: 8px;
-    margin-bottom: 25px;
     border: 2px solid #e0e0e0;
     font-size: 16px;
     outline: none;
@@ -96,18 +100,64 @@ h2::after {
     letter-spacing: 0.5px;
 }
 
-.controls:focus {
+.form-control:focus {
     border-color: #9c7d03;
     box-shadow: 0 0 0 3px rgba(156, 125, 3, 0.1);
 }
 
-.controls:hover {
+.form-control:hover {
     border-color: #9c7d03;
     background-color: #fff;
 }
 
-.controls::placeholder {
-    color: #adb5bd;
+/* Estilos para el checkbox y su label */
+.remember-me {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.remember-me input[type="checkbox"] {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #9c7d03;
+}
+
+.remember-me label {
+    color: #001a3f;
+    font-size: 16px;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Ajustes para el contenedor de la contraseña */
+.password-group {
+    position: relative;
+    width: 100%;
+}
+
+.password-group .form-control {
+    padding-right: 45px; /* Espacio para el ícono del ojo */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    color: #9c7d03;
+    font-size: 20px;
+    transition: color 0.2s ease;
+}
+
+.toggle-password:hover {
+    color: #001a3f;
 }
 
 .container-password {
@@ -255,4 +305,28 @@ footer {
     text-align: center;
     padding: 20px 0;
     width: 100%;
+}
+
+
+.password-group {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.toggle-password i {
+    color: #666;
+}
+
+.toggle-password.show-password i:before {
+    content: "\f070"; /* Cambia al ícono de ojo tachado */
 }

@@ -1,303 +1,214 @@
-*{
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-  font-family: "Quicksand", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Quicksand", sans-serif;
 }
 
-body{
-  font-family: "Quicksand", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
-  background-color:rgb(247,247,247);
-  font-size: 12px;
+:root {
+    --primary-color: rgb(12,27,84);
+    --gold-color: #9c7d03;
+    --bg-color: rgb(247,247,247);
+    --text-dark: #2c2c2c;
+    --text-light: #666;
 }
 
-.header__1{
-  text-align: center;
-  background-color: rgb(12,27,84);
-  margin-bottom: 5px;
+body {
+    background-color: var(--bg-color);
+    font-size: 16px;
+    min-height: 100vh;
 }
 
-.header__2{
-  display: flex;
-  padding: 3px;
+main {
+    padding: 2rem;
 }
 
-.header__categorias{
-  padding: 3px;
-  font-size: 12px;
-  background-color: rgb(202,162,130);
-  border-top: 2px solid gb(247,247,247);
-  border-bottom: 2px solid gb(247,247,247);
-  color: white;
-  width: 100%;
+.product-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem;
+    display: flex;
+    gap: 3rem;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 3rem;
 }
 
-.header__img{
-  width: 5%;
+.product-description {
+    font-size: 20px;
+    line-height: 2;
+    color: var(--text-dark);
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+    letter-spacing: 0.3px;
+    margin: 2rem 0;
 }
 
-.fa-bag-shopping{
-  padding: 3px;
-  font-size: 10px;
-  background-color: rgb(202,162,130);
-  border-top: 2px solid gb(247,247,247);
-  border-bottom: 2px solid gb(247,247,247);
-  color: white;
+.product-stock {
+    margin: 2rem 0;
+    padding-bottom: 2rem;
 }
 
-.producto__img{
-  padding: 3px;
-  margin: 2px;
-  box-sizing: border-box;
+.out-of-stock {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 1rem 2rem;
+    font-size: 18px;
 }
 
-.fotoPrincipal{
-  width: 100%;
-  background-color: white;
+.product-image {
+    flex: 1;
+    max-width: 500px;
 }
 
-.producto__general{
-  padding: 3px;
-  margin: 2px;
-  box-sizing: border-box;
+.product-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-.info__nombre{
-  font-weight: 400;
-  font-size: 22px;
-  margin: 5px 0;
+.product-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
-.info__precio{
-  font-weight: 600;
-  font-size: 20px;
-  color: rgb(12,27,84);
-  margin: 25px 0;
+.product-name {
+    font-size: 32px;
+    color: var(--primary-color);
+    font-weight: 600;
+    border-bottom: 3px solid var(--gold-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
-.pago__1{
-  font-weight: 400;
-  font-size: 12px;
-  margin: 15px 0;
+.product-price {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
-.fa-credit-card{
-  color: rgb(12,27,84);
-  margin-right: 5px;
+.price {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--primary-color);
 }
 
-.pago__2{
-  font-weight: 400;
-  font-size: 12px;
-  margin: 15px 0;
+.discount {
+    background-color: var(--gold-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
 }
 
-.fa-tag{
-  color: rgb(12,27,84);
-  margin-right: 5px;
+.product-description {
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--text-dark);
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+    letter-spacing: 0.3px;
 }
 
-.pago__3{
-  font-weight: 400;
-  font-size: 12px;
-  margin: 15px 0;
- 
+.product-category {
+    font-size: 16px;
+    color: var(--text-light);
+    padding: 0.5rem 0;
+    border-top: 1px solid #eee;
 }
 
-.fa-truck{
-  color: rgb(12,27,84);
-  margin-right: 5px;
+.product-stock {
+    margin: 1rem 0;
 }
 
-.elegir{
-  display: flex;
-  border-top: 1px solid rgb(202,162,130);
-  border-bottom: 1px solid rgb(202,162,130);
-  justify-content: space-around;
+.stock-status {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 500;
 }
 
-.talle{
-  font-size: 16px;
-  background-color: rgb(247,247,247);
-  border:1px solid rgb(12,27,84);
-  border-radius: 3px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+.available {
+    background-color: #e8f5e9;
+    color: #2e7d32;
 }
 
-
-.cantidad{
-  font-size: 16px;
-  background-color: rgb(247,247,247);
-  border:1px solid rgb(12,27,84);
-  border-radius: 3px;
-  margin-top: 20px;
-  margin-bottom: 10px;
+.out-of-stock {
+    background-color: #ffebee;
+    color: #c62828;
 }
 
-.carrito{
-  text-align: center;
+.purchase-options {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    margin-top: 1rem;
 }
 
-.carrito__descrip{
-  font-size: 15px;
-  font-weight: 600;
-  margin: 10px;
+.quantity-select {
+    padding: 0.8rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 6px;
+    font-size: 16px;
+    width: 120px;
+    background-color: white;
+    cursor: pointer;
 }
 
-.carrito__stock{
-  border: 1px solid rgb(12,27,84);
-  border-radius: 3px;
-  background-color: rgb(12,27,84);
-  color: white;
-  display: inline;
-  padding: 3px;
-  margin: 10px;
-  font-size: 10px;
+.add-to-cart {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.carrito__agregar{
-  background-color: rgb(247,247,247);
-  padding: 3px;
-  margin-top: 15px;
-  font-size: 16px;
-  border:1px solid rgb(12,27,84);
-  color: rgb(12,27,84);
-  border-radius: 3px;
-  margin-bottom: 8px;
+.add-to-cart:hover {
+    background-color: var(--gold-color);
+    transform: translateY(-2px);
 }
 
-.carrito__agregar:hover{
-  background-color: rgb(247,247,247);
-  color: rgb(12,27,84);
-}
+@media (max-width: 768px) {
+    main {
+        padding: 1rem;
+    }
 
-.carrito__talles{
-  font-size: 12px;
-  color: black;
-}
+    .product-container {
+        flex-direction: column;
+        padding: 1rem;
+    }
 
-.envios__titulo{
-  margin: 20px 0;
-  color: rgb(12,27,84);
-  font-weight: 600;
-  font-size: 18px;
-}
+    .product-image {
+        max-width: 100%;
+    }
 
-.envios__codigo{
-  background-color: rgb(247,247,247);
-  padding: 3px;
-  font-size: 14px;
-  border:1px solid rgb(12,27,84);
-  color: rgb(12,27,84);
-  border-radius: 3px;
-}
+    .product-name {
+        font-size: 24px;
+    }
 
-.envios__boton{
-  background-color: rgb(12,27,84);
-  padding: 3px;
-  font-size: 14px;
-  border:1px solid rgb(247,247,247);
-  color: rgb(247,247,247);
-  border-radius: 3px;
-  margin-bottom: 8px;
-}
+    .price {
+        font-size: 22px;
+    }
 
-.envios__boton:hover{
-  background-color: rgb(12,27,84);
-  color: rgb(247,247,247);
-}
+    .purchase-options {
+        flex-direction: column;
+        align-items: stretch;
+    }
 
-.envios__buscarCodigo{
-  font-size: 12px;
-  color: black;
-}
-
-.envios{
-  padding: 3px;
-  margin: 5px 0;
-}
-
-.envios__domicilio{
-  margin: 3px 0;
-  font-weight: 600;
-}
-
-.envios__opcion1{
-  font-style: italic;
-}
-
-.envios__direc{
-  font-style: italic;
-}
-
-.fa-heart{
-  color: rgb(12,27,84);
-}
-
-.envios__precio{
-  color: rgb(12,27,84);
-}
-
-.comentario__cantidad{
-  margin-bottom: 20px;
-  margin-top: 20px;
-  border-top: 1px solid rgb(202,162,130);
-  font-weight: 600;
-  font-size: 18px;
-  color: rgb(12,27,84);
-  padding-top: 20px;
-}
-
-.comentario__area{
-  width: 100%;
-}
-
-footer{
-  padding: 10px;
-  background-color: rgb(12,27,84);
-  text-align: center;
-}
-
-.footer__img{
-  
-  width: 20%;
-}
-
-@media (361px <= width <= 769px){
-  .producto{
-      display: flex;
-      justify-content: space-around;
-      
-  }
-
-  .fotoPrincipal{
-      width: 100%;
-  }
-
-  .producto__general{
-      width: 300%;
-  }
-}
-
-@media (min-width: 770px){
-  .producto{
-      display: flex;
-      justify-content: space-around;
-      
-  }
-
-  .fotoPrincipal{
-      width: 100%;
-  }
-
-  .producto__general{
-      width: 150%;
-  }
+    .quantity-select {
+        width: 100%;
+    }
 }

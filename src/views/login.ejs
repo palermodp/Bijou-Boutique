@@ -25,31 +25,36 @@
             <% }); %>
           </div>
           <% } %>
-          <input
-            class="controls"
-            id="user"
-            type="text"
-            name="email"
-            placeholder="Correo electrónico"
-          />
-          <div class="container-password">
+          <div class="form-group">
             <input
-              class="pass-control"
-              id="pass"
+              class="form-control"
+              id="user"
+              type="text"
+              name="email"
+              placeholder="Correo electrónico"
+            />
+          </div>
+          <div class="form-group password-group">
+            <input
               type="password"
+              id="password"
               name="password"
+              class="form-control"
               placeholder="Contraseña"
             />
-            <i id="togglePassword" class="bx bx-show-alt"></i>
+            <button type="button" id="togglePassword" class="toggle-password">
+              <i class="bx bx-show"></i>
+            </button>
           </div>
+
           <div class="remember-me">
-            <label for="recordame">Recordame</label>
             <input
               type="checkbox"
               name="recordame"
               value="recordar"
               id="recordame"
             />
+            <label for="recordame">Recordame</label>
           </div>
           <a href="/register" class="register-link">
             <h5>¿No tienes cuenta aún? Click aquí!</h5>
@@ -59,22 +64,7 @@
       </div>
     </main>
     <%- include("partials/footer.ejs") %>
-    <script>
-      const passwordInput = document.querySelector(".pass-control");
-      const eyeIcon = document.querySelector(".bx");
-
-      eyeIcon.addEventListener("click", () => {
-        if (passwordInput.type === "password") {
-          passwordInput.type = "text";
-          eyeIcon.classList.remove("bx-show");
-          eyeIcon.classList.add("bx-hide");
-        } else {
-          passwordInput.type = "password";
-          eyeIcon.classList.remove("bx-hide");
-          eyeIcon.classList.add("bx-show");
-        }
-      });
-    </script>
+    <script src="/js/passwordToggle.js"></script>
     <script src="/js/loginValidation.js"></script>
   </body>
 </html>

@@ -171,12 +171,10 @@ const userController = {
       console.log('Datos del formulario:', req.body);
       console.log('Archivo:', req.file);
 
-      // Verificar que tenemos todos los datos necesarios
       if (!req.body.name || !req.body.surname || !req.body.email) {
         throw new Error('Faltan datos requeridos');
       }
 
-      // Actualizar usuario
       const result = await db.User.update(
         {
           name: req.body.name,
@@ -193,11 +191,9 @@ const userController = {
 
       console.log('Resultado de la actualización:', result);
 
-      // Obtener usuario actualizado
       const updatedUser = await db.User.findByPk(user.id);
       console.log('Usuario actualizado:', updatedUser);
 
-      // Actualizar sesión
       req.session.usuarioLogueado = updatedUser;
 
       return res.redirect("/profile");
@@ -208,7 +204,7 @@ const userController = {
         errors: [{ msg: "Error al actualizar el perfil: " + error.message }]
       });
     }
-  }, // <-- Faltaba esta coma
+  }, 
   updatePass: (req, res) => {
     return res.render("updatePass", {
       user: req.session.usuarioLogueado,
@@ -219,51 +215,50 @@ const userController = {
     const { currentPassword, newPassword, confirmPassword } = req.body;
     const user = req.session.usuarioLogueado;
 
-    if (!user) {
-      return res.redirect("/login");
-    }
-
-    let errors = [];
-
-    if (!bcrypt.compareSync(currentPassword, user.password)) {
-      errors.push({ msg: "La contraseña actual es incorrecta." });
-    }
-
-    if (newPassword !== confirmPassword) {
-      errors.push({ msg: "Las nuevas contraseñas no coinciden." });
-    }
-
-    if (errors.length > 0) {
-      return res.render("updatePass", {
-        errors,
-        user,
-      });
-    }
-
     try {
-      const hashedPassword = bcrypt.hashSync(newPassword, 10);
-
-      await db.User.update(
-        { password: hashedPassword },
-        { where: { id: user.id } }
-      );
-
-      req.session.destroy((err) => {
-        if (err) {
-          console.log(err);
-          return res
-            .status(500)
-            .send("No se pudo cerrar sesión después de cambiar la contraseña");
+        if (!user) {
+            return res.redirect("/login");
         }
 
-        res.clearCookie("recordame");
-        return res.redirect("/login");
-      });
-    } catch (error) {
-      console.log(error);
-      res.status(500).send({ error: error.message });
-    }
-  },
-};
+        const currentUser = await db.User.findByPk(user.id);
+        
+        if (!bcrypt.compareSync(currentPassword, currentUser.password)) {
+            return res.render("updatePass", {
+                errors: [{ msg: "La contraseña actual es incorrecta." }],
+                user
+            });
+        }
 
-module.exports = userController;
+        if (newPassword !== confirmPassword) {
+            return res.render("updatePass", {
+                errors: [{ msg: "Las nuevas contraseñas no coinciden." }],
+                user
+            });
+        }
+
+        const hashedPassword = bcrypt.hashSync(newPassword, 10);
+
+        await db.User.update(
+            { password: hashedPassword },
+            { where: { id: user.id } }
+        );
+
+        req.session.flashMessage = "Contraseña actualizada exitosamente. Por favor, inicia sesión nuevamente.";
+
+        req.session.destroy((err) => {
+            if (err) {
+                console.error("Error al cerrar sesión:", err);
+                return res.status(500).send("Error al procesar la solicitud");
+            }
+            res.clearCookie("recordame");
+            return res.redirect("/login");
+        });
+
+    } catch (error) {
+        console.error("Error al actualizar contraseña:", error);
+        return res.render("updatePass", {
+            errors: [{ msg: "Error al actualizar la contraseña" }],
+            user
+        });
+    }
+}

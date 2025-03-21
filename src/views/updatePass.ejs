@@ -4,12 +4,13 @@
     <meta charset="UTF-8" />
     <link rel="website icon" type="png" href="images/brandmark@2x-8.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Formulario de Cambio de Contraseña</title>
-    <link rel="stylesheet" href="css/updatePass.css" />
+    <title>Actualizar Contraseña</title>
+    <link rel="stylesheet" href="/css/editProfile.css" />
   </head>
   <body>
     <%- include("partials/header.ejs", { user: user }) %>
     <main>
+      <h1 class="section-title">Actualizar Contraseña</h1>
       <div class="form-container">
         <form action="/updatePass" method="POST">
           <div class="form-group">
@@ -18,7 +19,7 @@
               type="password"
               id="current-password"
               name="currentPassword"
-              class="controls"
+              class="form-control"
             />
           </div>
           <div class="form-group">
@@ -27,7 +28,7 @@
               type="password"
               id="new-password"
               name="newPassword"
-              class="controls"
+              class="form-control"
             />
           </div>
           <div class="form-group">
@@ -36,11 +37,11 @@
               type="password"
               id="confirm-password"
               name="confirmPassword"
-              class="controls"
+              class="form-control"
             />
           </div>
           <div class="form-group">
-            <button type="submit" class="btn-primary">Guardar</button>
+            <button type="submit" class="submit-button">Guardar cambios</button>
           </div>
         </form>
         <% if (errors && errors.length > 0) { %>
