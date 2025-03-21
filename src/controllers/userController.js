@@ -167,12 +167,12 @@ const userController = {
     }
 
     try {
-      console.log('ID del usuario:', user.id);
-      console.log('Datos del formulario:', req.body);
-      console.log('Archivo:', req.file);
+      console.log("ID del usuario:", user.id);
+      console.log("Datos del formulario:", req.body);
+      console.log("Archivo:", req.file);
 
       if (!req.body.name || !req.body.surname || !req.body.email) {
-        throw new Error('Faltan datos requeridos');
+        throw new Error("Faltan datos requeridos");
       }
 
       const result = await db.User.update(
@@ -181,18 +181,18 @@ const userController = {
           surname: req.body.surname,
           email: req.body.email,
           role: req.body.role,
-          image: req.file ? req.file.filename : user.image
+          image: req.file ? req.file.filename : user.image,
         },
-        { 
+        {
           where: { id: user.id },
-          returning: true
+          returning: true,
         }
       );
 
-      console.log('Resultado de la actualización:', result);
+      console.log("Resultado de la actualización:", result);
 
       const updatedUser = await db.User.findByPk(user.id);
-      console.log('Usuario actualizado:', updatedUser);
+      console.log("Usuario actualizado:", updatedUser);
 
       req.session.usuarioLogueado = updatedUser;
 
@@ -201,10 +201,10 @@ const userController = {
       console.error("Error al actualizar perfil:", error);
       return res.render("editProfile", {
         user: user,
-        errors: [{ msg: "Error al actualizar el perfil: " + error.message }]
+        errors: [{ msg: "Error al actualizar el perfil: " + error.message }],
       });
     }
-  }, 
+  },
   updatePass: (req, res) => {
     return res.render("updatePass", {
       user: req.session.usuarioLogueado,
@@ -216,49 +216,52 @@ const userController = {
     const user = req.session.usuarioLogueado;
 
     try {
-        if (!user) {
-            return res.redirect("/login");
-        }
+      if (!user) {
+        return res.redirect("/login");
+      }
 
-        const currentUser = await db.User.findByPk(user.id);
-        
-        if (!bcrypt.compareSync(currentPassword, currentUser.password)) {
-            return res.render("updatePass", {
-                errors: [{ msg: "La contraseña actual es incorrecta." }],
-                user
-            });
-        }
+      const currentUser = await db.User.findByPk(user.id);
 
-        if (newPassword !== confirmPassword) {
-            return res.render("updatePass", {
-                errors: [{ msg: "Las nuevas contraseñas no coinciden." }],
-                user
-            });
-        }
-
-        const hashedPassword = bcrypt.hashSync(newPassword, 10);
-
-        await db.User.update(
-            { password: hashedPassword },
-            { where: { id: user.id } }
-        );
-
-        req.session.flashMessage = "Contraseña actualizada exitosamente. Por favor, inicia sesión nuevamente.";
-
-        req.session.destroy((err) => {
-            if (err) {
-                console.error("Error al cerrar sesión:", err);
-                return res.status(500).send("Error al procesar la solicitud");
-            }
-            res.clearCookie("recordame");
-            return res.redirect("/login");
-        });
-
-    } catch (error) {
-        console.error("Error al actualizar contraseña:", error);
+      if (!bcrypt.compareSync(currentPassword, currentUser.password)) {
         return res.render("updatePass", {
-            errors: [{ msg: "Error al actualizar la contraseña" }],
-            user
+          errors: [{ msg: "La contraseña actual es incorrecta." }],
+          user,
         });
+      }
+
+      if (newPassword !== confirmPassword) {
+        return res.render("updatePass", {
+          errors: [{ msg: "Las nuevas contraseñas no coinciden." }],
+          user,
+        });
+      }
+
+      const hashedPassword = bcrypt.hashSync(newPassword, 10);
+
+      await db.User.update(
+        { password: hashedPassword },
+        { where: { id: user.id } }
+      );
+
+      req.session.flashMessage =
+        "Contraseña actualizada exitosamente. Por favor, inicia sesión nuevamente.";
+
+      req.session.destroy((err) => {
+        if (err) {
+          console.error("Error al cerrar sesión:", err);
+          return res.status(500).send("Error al procesar la solicitud");
+        }
+        res.clearCookie("recordame");
+        return res.redirect("/login");
+      });
+    } catch (error) {
+      console.error("Error al actualizar contraseña:", error);
+      return res.render("updatePass", {
+        errors: [{ msg: "Error al actualizar la contraseña" }],
+        user,
+      });
     }
-}
+  },
+}; // <-- Faltaba esta llave de cierre
+
+module.exports = userController;
