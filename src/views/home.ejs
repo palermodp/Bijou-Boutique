@@ -133,6 +133,9 @@
       </section>
     </main>
     <%- include("partials/footer.ejs") %>
+    <button id="back-to-top" class="back-to-top-btn" title="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
     <a
       href="https://wa.me/message/2JHVL5B5NH2UD1"
       target="_blank"
@@ -174,6 +177,26 @@
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
         },
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const backToTopButton = document.getElementById("back-to-top");
+        
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 300) {
+            backToTopButton.classList.add("show");
+          } else {
+            backToTopButton.classList.remove("show");
+          }
+        });
+        
+        backToTopButton.addEventListener("click", () => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+        });
       });
     </script>
   </body>
