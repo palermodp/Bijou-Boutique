@@ -23,13 +23,13 @@
     <%- include("partials/header.ejs", { user: user }) %>
     <nav>
       <ul>
-        <li><a href="/aboutUs">Acerca de nosotros</a></li>
+        <li><a href="/aboutUs">About</a></li>
         <% if (user && user.role === 'admin') { %>
-        <li><a href="/products/productCard">Edición de productos</a></li>
-        <li><a href="/products/create">Crear producto</a></li>
+        <li><a href="/products/productCard">Editar</a></li>
+        <li><a href="/products/create">Crear</a></li>
         <% } %>
-        <li><a href="/products">Nuestros productos</a></li>
-        <li><a href="/maps">Nuestras sucursales</a></li>
+        <li><a href="/products">Productos</a></li>
+        <li><a href="/maps">Sucursales</a></li>
         <li><a href="/contactUs">Contáctanos</a></li>
       </ul>
     </nav>
@@ -38,21 +38,33 @@
         <div class="swiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide">
-              <img src="/images/slider1.jpg" alt="Slider Image 1" />
+              <img
+                src="/images/slider1.jpg"
+                loading="lazy"
+                alt="Slider Image 1"
+              />
               <div class="slide-content">
                 <h2>Bienvenido a Bijou Boutique</h2>
                 <p>Descubre nuestra exclusiva colección</p>
               </div>
             </div>
             <div class="swiper-slide">
-              <img src="/images/slider2.jpg" alt="Slider Image 2" />
+              <img
+                src="/images/slider2.jpg"
+                loading="lazy"
+                alt="Slider Image 2"
+              />
               <div class="slide-content">
                 <h2>Diseños Únicos</h2>
                 <p>Calidad y elegancia en cada pieza</p>
               </div>
             </div>
             <div class="swiper-slide">
-              <img src="/images/slider3.jpg" alt="Slider Image 3" />
+              <img
+                src="/images/slider3.jpg"
+                loading="lazy"
+                alt="Slider Image 3"
+              />
               <div class="slide-content">
                 <h2>Colección Premium</h2>
                 <p>Joyas que cuentan historias</p>
@@ -143,27 +155,20 @@
     >
       <i class="fa-brands fa-whatsapp"></i>
     </a>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const radioBtns = document.querySelectorAll('input[name="radio-btn"]');
-        let currentSlide = 0;
-
-        function nextSlide() {
-          radioBtns[currentSlide].checked = false;
-          currentSlide = (currentSlide + 1) % radioBtns.length;
-          radioBtns[currentSlide].checked = true;
-        }
-
-        setInterval(nextSlide, 5000);
-      });
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
       const swiper = new Swiper(".swiper", {
         loop: true,
+        speed: 800,
+        preloadImages: true,
+        lazy: {
+          loadPrevNext: true,
+          loadPrevNextAmount: 2,
+        },
         autoplay: {
           delay: 5000,
           disableOnInteraction: false,
+          pauseOnMouseEnter: true,
         },
         effect: "fade",
         fadeEffect: {
@@ -172,17 +177,20 @@
         pagination: {
           el: ".swiper-pagination",
           clickable: true,
+          dynamicBullets: true,
         },
         navigation: {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
         },
+        observer: true,
+        observeParents: true,
       });
     </script>
     <script>
-      document.addEventListener("DOMContentLoaded", function() {
+      document.addEventListener("DOMContentLoaded", function () {
         const backToTopButton = document.getElementById("back-to-top");
-        
+
         window.addEventListener("scroll", () => {
           if (window.scrollY > 300) {
             backToTopButton.classList.add("show");
@@ -190,11 +198,11 @@
             backToTopButton.classList.remove("show");
           }
         });
-        
+
         backToTopButton.addEventListener("click", () => {
           window.scrollTo({
             top: 0,
-            behavior: "smooth"
+            behavior: "smooth",
           });
         });
       });
@@ -202,32 +210,30 @@
   </body>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const urlParams = new URLSearchParams(window.location.search);
-        const welcomeName = urlParams.get("welcome");
-        const logout = urlParams.get("logout");
+      const urlParams = new URLSearchParams(window.location.search);
+      const welcomeName = urlParams.get("welcome");
+      const logout = urlParams.get("logout");
 
-        if (welcomeName) {
-            const alert = document.getElementById("welcome-alert");
-            alert.textContent = `¡Bienvenido/a ${welcomeName}!`;
-            alert.classList.add("show");
+      if (welcomeName) {
+        const alert = document.getElementById("welcome-alert");
+        alert.textContent = `¡Bienvenido/a ${welcomeName}!`;
+        alert.classList.add("show");
 
-            setTimeout(() => {
-                alert.classList.remove("show");
-            }, 3000);
-        }
+        setTimeout(() => {
+          alert.classList.remove("show");
+        }, 3000);
+      }
 
-        if (logout) {
-            const alert = document.getElementById("welcome-alert");
-            alert.textContent = "¡Sesión cerrada correctamente!";
-            alert.classList.add("show");
+      if (logout) {
+        const alert = document.getElementById("welcome-alert");
+        alert.textContent = "¡Sesión cerrada correctamente!";
+        alert.classList.add("show");
 
-            setTimeout(() => {
-                alert.classList.remove("show");
-            }, 3000);
-        }
-
-        // Limpiar la URL
-        window.history.replaceState({}, document.title, window.location.pathname);
+        setTimeout(() => {
+          alert.classList.remove("show");
+        }, 3000);
+      }
+      window.history.replaceState({}, document.title, window.location.pathname);
     });
   </script>
 </html>
